@@ -44,8 +44,13 @@ namespace AnsBallBot.Database.Operations
         {
             using (var db = new ApplicationContext())
             {
-                db.Phones.Update(phone);
-                await db.SaveChangesAsync();
+                chatState.State = newChatState;
+                db.ChatStates.Update(chatState);
+                var count = await db.SaveChangesAsync();
+
+                Log.Info($"ChatState успешно обновлен, count: {count}, id: {chatState.Id}, newState: {chatState.State}");
+
+                return chatState;
             }
         }
     }
