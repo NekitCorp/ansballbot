@@ -1,8 +1,10 @@
 # AnsBallBot
 @ansballbot
 
-appsettings.json:
+`appsettings.json:`
+```json
 {
   "TelegramBotToken": "...",
   "DatabaseConnectionString": "..."
 }
+```
