@@ -12,5 +12,6 @@ export type Messages = {
         nonCommittal: string[];
         negative: string[];
     };
-    info: (percent: number) => string;
+    info: (info: string, percent: number) => string;
+    when: (event: string, date: string) => string;
 };

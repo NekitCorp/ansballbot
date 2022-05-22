@@ -1,11 +1,17 @@
+import dayjs from 'dayjs';
 import { Context, Telegraf } from 'telegraf';
 import { Update } from 'telegraf/typings/core/types/typegram';
-import { delay, random, randomItem } from './helpers';
+import { delay, random, randomDate, randomItem } from './helpers';
 import { getMessages } from './messages';
 import { LanguageCode, Messages } from './typings';
 
+// Loading dayjs locales
+import 'dayjs/locale/ru';
+import 'dayjs/locale/en';
+
 export interface MyContext extends Context {
     messages: Messages;
+    code: LanguageCode;
 }
 
 export class TelegramBot {
@@ -38,6 +44,7 @@ export class TelegramBot {
         });
         this.bot.use(async (ctx, next) => {
             const languageCode = ctx.message?.from.language_code as LanguageCode;
+            ctx.code = languageCode;
             ctx.messages = getMessages(languageCode);
             return next();
         });
@@ -48,8 +55,19 @@ export class TelegramBot {
             ctx.reply(ctx.messages.start(ctx.message.from.first_name || ctx.message.from.username)),
         );
         this.bot.help((ctx) => ctx.reply(ctx.messages.help));
-        this.bot.command('info', (ctx) => ctx.reply(ctx.messages.info(random(0, 100))));
-        this.bot.command('when', (ctx) => ctx.reply('TODO'));
+        this.bot.command('info', (ctx) =>
+            ctx.reply(ctx.messages.info(ctx.message.text.replace('/info', '').trim(), random(0, 100))),
+        );
+        this.bot.command('when', (ctx) =>
+            ctx.reply(
+                ctx.messages.when(
+                    ctx.message.text.replace('/when', '').trim(),
+                    dayjs(randomDate(dayjs().toDate(), dayjs().add(10, 'years').toDate()))
+                        .locale(ctx.code)
+                        .format('DD MMMM YYYY'),
+                ),
+            ),
+        );
         this.bot.on('text', async (ctx) => {
             await ctx.replyWithChatAction('typing');
             await delay(1500);
