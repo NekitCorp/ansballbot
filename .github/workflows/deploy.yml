@@ -21,8 +21,12 @@ jobs:
             - run: npm run build
             - run: cp package.json build/package.json
             - run: cp package-lock.json build/package-lock.json
-            # Add environment variables
-            - run: npm run github-add-env
+            # Get resource identifiers
+            - name: 'Get resource identifiers'
+              env:
+                  YC_OAUTH_TOKEN: ${{ secrets.YC_OAUTH_TOKEN }}
+                  YC_CLOUD_ID: ${{ secrets.YC_CLOUD_ID }}
+              run: npm run github-add-env
             # Deploy
             - uses: goodsmileduck/yandex-serverless-action@v1
               with:
