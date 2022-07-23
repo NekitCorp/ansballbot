@@ -1,8 +1,8 @@
-# Magic 8 Ball Telegram Bot
+# 🎱 Magic 8 Ball Telegram Bot
 
 https://t.me/ansballbot
 
-## Development
+## 👨‍💻 Development
 
 ```sh
 # Install dependencies
@@ -15,7 +15,7 @@ cp .env .env.local
 yarn start
 ```
 
-## Initialization Yandex Cloud
+## ☁️ Initialization Yandex Cloud
 
 1. Create folder in [Yandex Cloud console](https://console.cloud.yandex.ru/cloud)
     - Name: `ans-ball-bot`
@@ -26,7 +26,7 @@ yarn start
     - Name: `ans-ball-bot-function`
 4. Make function `ans-ball-bot-function` public
 
-## Initialization GitHub
+## 📖 Initialization GitHub
 
 Добавить `Actions secrets`:
 
@@ -37,7 +37,7 @@ yarn start
 | `OAUTH_TOKEN`        | Get an OAuth token from Yandex.OAuth. To do this, go to the [link](https://oauth.yandex.com/authorize?response_type=token&client_id=1a6990aa636648e9b2ef855fa7bec2fb) and click Allow. |
 | `SERVICE_ACCOUNT_ID` | `price-checker-bot-sa` service account ID.                                                                                                                                             |
 
-### Initialization Telegram
+## 📱 Initialization Telegram
 
 1. Create a bot using [BotFather](https://t.me/BotFather)
 2. Call the `setWebHook` method in the Bot API via the following url `https://api.telegram.org/bot{my_bot_token}/setWebhook?url={url_to_send_updates_to}` where:

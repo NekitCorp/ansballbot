@@ -17,15 +17,16 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
             # Build
-            - run: yarn
-            - run: yarn build
+            - run: npm ci
+            - run: npm run build
             - run: cp package.json build/package.json
+            - run: cp package-lock.json build/package-lock.json
             # Deploy
             - uses: goodsmileduck/yandex-serverless-action@v1
               with:
                   token: ${{ secrets.OAUTH_TOKEN }}
                   function_id: ${{ secrets.CLOUD_FUNCTION_ID }}
-                  runtime: 'nodejs14'
+                  runtime: 'nodejs16'
                   entrypoint: 'index.handler'
                   environment: BOT_TOKEN=${{ secrets.BOT_TOKEN }}
                   memory: '128'

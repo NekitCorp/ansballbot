@@ -1,6 +1,11 @@
-require('dotenv-flow').config();
+import 'dotenv-flow/config';
+import { TelegramBot } from './src/bot';
 
-import { telegramBot } from './src/bot';
+if (!process.env.BOT_TOKEN) {
+    throw new Error('Environment variable `BOT_TOKEN` not provided');
+}
+
+const telegramBot = new TelegramBot(process.env.BOT_TOKEN);
 
 telegramBot.launch();
 

@@ -6,8 +6,8 @@ import { getMessages } from './messages';
 import { LanguageCode, Messages } from './typings';
 
 // Loading dayjs locales
-import 'dayjs/locale/ru';
 import 'dayjs/locale/en';
+import 'dayjs/locale/ru';
 
 export interface MyContext extends Context {
     messages: Messages;
@@ -85,9 +85,3 @@ export class TelegramBot {
         );
     }
 }
-
-if (!process.env.BOT_TOKEN) {
-    throw new Error('Environment variable `BOT_TOKEN` not provided');
-}
-
-export const telegramBot = new TelegramBot(process.env.BOT_TOKEN);
