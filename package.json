@@ -2,8 +2,9 @@
     "name": "ansballbot",
     "version": "1.0.0",
     "scripts": {
-        "start": "nodemon --signal SIGHUP --files dev.ts",
-        "build": "tsc"
+        "start": "nodemon --signal SIGHUP --files scripts/dev.ts",
+        "build": "tsc",
+        "init-yandex-cloud": "ts-node scripts/init-yandex-cloud.ts"
     },
     "dependencies": {
         "dayjs": "^1.11.4",
@@ -11,6 +12,7 @@
     },
     "devDependencies": {
         "@types/node": "^18.0.6",
+        "@yandex-cloud/nodejs-sdk": "^2.1.1",
         "dotenv-flow": "^3.2.0",
         "nodemon": "^2.0.19",
         "ts-node": "^10.9.1",

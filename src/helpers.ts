@@ -17,3 +17,13 @@ export function random(min: number, max: number): number {
 export function randomDate(from: Date, to: Date): Date {
     return new Date(from.getTime() + Math.random() * (to.getTime() - from.getTime()));
 }
+
+export function getEnv(name: string, defaultValue?: string): string {
+    const value = process.env[name] || defaultValue;
+
+    if (!value) {
+        throw new Error(`Env variable ${name} is not defined`);
+    }
+
+    return value;
+}
