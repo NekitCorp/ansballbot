@@ -30,11 +30,11 @@ jobs:
             # Deploy
             - uses: goodsmileduck/yandex-serverless-action@v1
               with:
-                  token: ${{ secrets.OAUTH_TOKEN }}
+                  token: ${{ secrets.YC_OAUTH_TOKEN }}
                   function_id: ${{ env.YC_CLOUD_FUNCTION_ID }}
                   runtime: 'nodejs16'
                   entrypoint: 'index.handler'
-                  environment: BOT_TOKEN=${{ secrets.BOT_TOKEN }}
+                  environment: BOT_TOKEN=${{ secrets.TG_BOT_TOKEN }}
                   memory: '128'
                   source: './build'
                   execution_timeout: '10'
