@@ -4,7 +4,8 @@
     "scripts": {
         "start": "nodemon --signal SIGHUP --files scripts/dev.ts",
         "build": "tsc",
-        "init-yandex-cloud": "ts-node scripts/init-yandex-cloud.ts"
+        "init-yandex-cloud": "ts-node scripts/init-yandex-cloud.ts",
+        "github-add-env": "ts-node scripts/github-add-env.ts"
     },
     "dependencies": {
         "dayjs": "^1.11.4",

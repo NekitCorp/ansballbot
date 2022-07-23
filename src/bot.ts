@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 import { Context, Telegraf } from 'telegraf';
 import { Update } from 'telegraf/typings/core/types/typegram';
-import { delay, random, randomDate, randomItem } from './helpers';
 import { getMessages } from './messages';
 import { LanguageCode, Messages } from './typings';
+import { delay, random, randomDate, randomItem } from './utils/helpers';
 
 // Loading dayjs locales
 import 'dayjs/locale/en';
