@@ -1,11 +1,9 @@
 import { TelegramBot } from './src/bot';
 import { ICloudEvent, ICloudResponse, ICloudServiceData } from './src/typings';
+import { getEnv } from './src/utils/helpers';
 
-if (!process.env.BOT_TOKEN) {
-    throw new Error('Environment variable `BOT_TOKEN` not provided');
-}
-
-const telegramBot = new TelegramBot(process.env.BOT_TOKEN);
+const token = getEnv('TG_BOT_TOKEN');
+const telegramBot = new TelegramBot(token);
 
 /**
  * Handler for Yandex Cloud Function

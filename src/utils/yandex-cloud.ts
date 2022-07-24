@@ -13,10 +13,6 @@ const {
         folder_service: { CreateFolderRequest, ListFoldersRequest },
         cloud_service: { GetCloudRequest },
     },
-    iam: {
-        service_account: { ServiceAccount },
-        service_account_service: { CreateServiceAccountRequest, ListServiceAccountsRequest },
-    },
     serverless: {
         functions_function: { Function },
         functions_function_service: { CreateFunctionRequest, ListFunctionsRequest },
@@ -105,40 +101,6 @@ export class YandexCloudManager {
      */
     async getCloud(cloudId: string) {
         return await this.cloudService.get(GetCloudRequest.fromPartial({ cloudId }));
-    }
-
-    /* -------------------------------------------------------------------------- */
-    /*                               Service account                              */
-    /* -------------------------------------------------------------------------- */
-
-    /**
-     * Creates a service account in the specified folder.
-     * @ref https://cloud.yandex.ru/docs/iam/api-ref/ServiceAccount/create
-     * @param folderId Required. ID of the folder to create a service account in. To get the folder ID, use a list request.
-     * @param name Required. Name of the service account. The name must be unique within the cloud.
-     */
-    async createServiceAccount(folderId: string, name: string) {
-        const operation = await this.serviceAccountService.create(
-            CreateServiceAccountRequest.fromPartial({ folderId, name }),
-        );
-        return await this.waitAndDecodeOperation(operation, ServiceAccount.decode);
-    }
-
-    /**
-     * Find service account in the specified folder.
-     * @ref https://cloud.yandex.ru/docs/iam/api-ref/ServiceAccount/list
-     */
-    async findServiceAccountByName(folderId: string, name: string) {
-        const { serviceAccounts } = await this.serviceAccountService.list(
-            ListServiceAccountsRequest.fromPartial({ folderId, filter: `name="${name}"` }),
-        );
-
-        if (!serviceAccounts[0]) {
-            console.error(serviceAccounts);
-            throw new Error(`Service account ${name} doesn't found.`);
-        }
-
-        return serviceAccounts[0];
     }
 
     /* -------------------------------------------------------------------------- */

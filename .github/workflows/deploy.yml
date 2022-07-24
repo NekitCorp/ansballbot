@@ -38,4 +38,3 @@ jobs:
                   memory: '128'
                   source: './build'
                   execution_timeout: '10'
-                  service_account: ${{ env.YC_SERVICE_ACCOUNT_ID }}

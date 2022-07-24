@@ -9,7 +9,6 @@ const YC_CLOUD_FUNCTION_NAME = getEnv('YC_CLOUD_FUNCTION_NAME');
 const YC_CLOUD_ID = getEnv('YC_CLOUD_ID');
 const YC_FOLDER_NAME = getEnv('YC_FOLDER_NAME');
 const YC_OAUTH_TOKEN = getEnv('YC_OAUTH_TOKEN');
-const YC_SERVICE_ACCOUNT_NAME = getEnv('YC_SERVICE_ACCOUNT_NAME');
 
 const manager = new YandexCloudManager(YC_OAUTH_TOKEN);
 
@@ -20,11 +19,7 @@ async function main() {
     const fun = await manager.findFunctionByName(folder.id, YC_CLOUD_FUNCTION_NAME);
     console.log(`Cloud function ${YC_CLOUD_FUNCTION_NAME} id: ${fun.id}`);
 
-    const sa = await manager.findServiceAccountByName(folder.id, YC_SERVICE_ACCOUNT_NAME);
-    console.log(`Service account ${YC_SERVICE_ACCOUNT_NAME} id: ${sa.id}`);
-
     fs.appendFileSync(GITHUB_ENV, `YC_CLOUD_FUNCTION_ID=${fun.id}\n`);
-    fs.appendFileSync(GITHUB_ENV, `YC_SERVICE_ACCOUNT_ID=${sa.id}\n`);
 }
 
 main();
