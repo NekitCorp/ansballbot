@@ -39,7 +39,7 @@ export class TelegramBot {
 
     private registerMiddlewares() {
         this.bot.use(async (ctx, next) => {
-            console.log('[TELEGRAM_UPDATE]', JSON.stringify(ctx.update));
+            console.log(JSON.stringify({ message: 'Telegram update', level: 'INFO', ...ctx.update }));
             await next();
         });
         this.bot.use(async (ctx, next) => {
